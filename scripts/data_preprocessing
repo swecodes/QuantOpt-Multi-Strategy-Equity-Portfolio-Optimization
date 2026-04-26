@@ -1,0 +1,24 @@
+import pandas as pd
+import numpy as np
+
+def preprocess_portfolio_data(data):
+    data.dropna(inplace = True)
+    returns_columns - [col for col in data.columns if "Date" not in col]
+    data[returns_columns] = data[returns_columns].pct_change()
+    """
+    Investors don't care if a stock is $150 or $1,500; they care about the percentage it went up or down.pct_change():
+    This calculates the percentage difference between today's price and yesterday's price.Formula: $Return = {Price_today} - {Price_yesterday} / {Price_yesterday}
+
+    """
+    log_returns_columns = [f"Log Returns ({col})" for col in returns_columns]
+    data[log_returns_columns] = np.log(1 + data[returns_columns])
+    # log returns help to calculate final result more accurately, as it captures the loss and growth cumulatively
+
+    window = 20  # Adjust the window size as needed
+    rolling_mean_columns = [f"Rolling Mean ({col})" for col in returns_columns]
+    rolling_std_columns = [f"Rolling Std ({col})" for col in returns_columns]
+    data[rolling_mean_columns] = data[returns_columns].rolling(window=window).mean() # returns the avg of last 20 days
+    data[rolling_std_columns] = data[returns_columns].rolling(window=window).std()
+    # std is calculated which shows how much a price wiggles away from the avg
+    #std = risk, if the number is high then the stock is volatile, if it is low, then stock is stable
+    return data
