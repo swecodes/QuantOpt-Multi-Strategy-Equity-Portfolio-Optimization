@@ -1,5 +1,5 @@
 # QuantOpt-Multi-Strategy-Equity-Portfolio-Optimization
-![Efficient Frontier](efficient_frontier.png)
+![Efficient Frontier](outputs/efficient_frontier.png))
 This project demonstrates a rigorous end-to-end quantitative finance pipeline, moving from raw market data acquisition to the deployment of modern portfolio optimization strategies. Unlike basic financial scripts, this repository implements a dual-strategy approach comparing Mean-Variance Optimization (Sharpe-Max) against Risk Parity, accounting for real-world constraints such as capital allocation limits and non-finite data handling.
 
 Portfolio Optimization and Quantitative Analysis
